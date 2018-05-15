@@ -10,30 +10,41 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
-  constructor(private _http: Http) {
+  public loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  public isUserLoggedIn;
 
+  constructor(private _http: Http) {
+    this.isUserLoggedIn = false;
   }
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+
+  setUserLoggedIn() {
+    this.isUserLoggedIn = true;
+  }
+
+  getUserLoggedIn() {
+    return this.isUserLoggedIn;
+  }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
-  private apiUrl = "http://localhost/angular6_api/";
+  private apiUrl = "http://localhost/angular6_api/webservices/";
 
   // saveEmployee():Observable<CEmployee[]> {
   login(loginForm: User): Observable<User[]> {
-    // console.log(empForm);
+    console.log(loginForm);
 
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    this.loggedIn.next(true);
+    // this.loggedIn.next(true);
 
-    return this._http.post(this.apiUrl + 'auth/login/', loginForm, {
+    return this._http.post(this.apiUrl + 'login/', loginForm, {
       headers: headers
     }).map((response: Response) => <User[]>response.json());
 
   }
+
 
 }
