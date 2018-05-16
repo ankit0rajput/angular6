@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <!-- general form elements -->
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Add Employee</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form #employeeForm="ngForm" (ngSubmit)="employeeForm.form.valid && addemployee(employeeForm)" nonvalidate>
+      <div class="box-body">
+        <div class="form-group" [ngClass]="{'has-error':employeeForm.submitted && !employeeForm.name}">
+          <label>Name</label>
+          <input type="text" name="name" [(ngModel)]="employeeForm.name" #name="ngModel" class="form-control" placeholder="Enter Name"
+            ngModel required>
+          <div *ngIf="employeeForm.submitted && !employeeForm.name" class="help-block">Name is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':employeeForm.submitted && !employeeForm.email}">
+          <label>Email</label>
+          <input type="text" name="email" [(ngModel)]="employeeForm.email" #email="ngModel" class="form-control" placeholder="Enter Email"
+            ngModel required>
+          <span *ngIf="employeeForm.submitted && !employeeForm.email" class="help-block">Email is required.</span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':employeeForm.submitted && !employeeForm.address}">
+          <label>Address</label>
+          <textarea name="address" [(ngModel)]="employeeForm.address" #address="ngModel" class="form-control" placeholder="Enter Address"
+            ngModel required></textarea>
+          <span *ngIf="employeeForm.submitted && !employeeForm.address" class="help-block">Address is required.</span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':employeeForm.submitted && !employeeForm.companyname}">
+          <label>Company Name</label>
+          <input type="text" name="companyname" [(ngModel)]="employeeForm.companyname" #companyname="ngModel" class="form-control"
+            placeholder="Enter CompanyName">
+          <span *ngIf="employeeForm.submitted && !employeeForm.companyname" class="help-block">Company Name is required.</span>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error':employeeForm.submitted && !employeeForm.salary}">
+          <label>Salary</label>
+          <input type="text" name="salary" [(ngModel)]="employeeForm.salary" #salary="ngModel" class="form-control" placeholder="Enter Salary">
+          <span *ngIf="employeeForm.submitted && !employeeForm.salary" class="help-block">Salary is required.</span>
+        </div>
+      </div>
+      <!-- /.box-body -->
+
+      <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <!--[disabled]="!employeeForm.valid"-->
+      </div>
+    </form>
+  </div>
+  <!-- /.box -->
+
+
+</div>
+<!--/.col (left) -->

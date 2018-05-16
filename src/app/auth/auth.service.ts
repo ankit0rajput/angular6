@@ -22,7 +22,15 @@ export class AuthService {
   }
 
   getUserLoggedIn() {
-    return this.isUserLoggedIn;
+    // console.log(localStorage.getItem('currentUser'));
+    if (localStorage.getItem('currentUser')) {
+      this.loggedIn.next(true);
+      return true;
+    } else {
+      this.loggedIn.next(false);
+      return false;
+    }
+    //return this.isUserLoggedIn;
   }
 
   get isLoggedIn() {

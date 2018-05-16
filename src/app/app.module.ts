@@ -15,15 +15,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth/auth.service';
+import { EmployeeService } from './services/employee.service';
+
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthgaurdGuard } from './authgaurd.guard';
+import { AddemployeeComponent } from './addemployee/addemployee.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'login/logout', component: LoginComponent },
+  { path: 'dashboard', canActivate: [AuthgaurdGuard], component: DashboardComponent },
   { path: 'employeelist', canActivate: [AuthgaurdGuard], component: EmployeelistComponent },
+  { path: 'addemployee', canActivate: [AuthgaurdGuard], component: AddemployeeComponent },
 
   /*{path:'',component:LoginComponent}*/
 ];
@@ -43,6 +48,8 @@ const appRoutes: Routes = [
 
     LoginComponent,
 
+    AddemployeeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -51,7 +58,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule,
   ],
-  providers: [AuthService, FlashMessagesService, AuthgaurdGuard],
+  providers: [AuthService, EmployeeService, FlashMessagesService, AuthgaurdGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
