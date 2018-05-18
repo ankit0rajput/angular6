@@ -37,6 +37,10 @@
           <input type="text" name="salary" [(ngModel)]="employeeForm.salary" #salary="ngModel" class="form-control" placeholder="Enter Salary">
           <span *ngIf="employeeForm.submitted && !employeeForm.salary" class="help-block">Salary is required.</span>
         </div>
+        <div class="form-group">
+          <label>Image</label>
+          <input type="file" (change)="onFileSelected($event)">
+        </div>
       </div>
       <!-- /.box-body -->
 

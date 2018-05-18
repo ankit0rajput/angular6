@@ -1,38 +1,34 @@
 import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs/Observable';
 import { Employee } from '../addemployee/employee';
+import { ListEmployee } from '../employeelist/listemployee';
 import { TransferState } from '@angular/platform-browser';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EmployeeService {
 
-    constructor(private _http: Http) { }
+    constructor(private _http: Http, private _httpClient: HttpClient) { }
 
 
     private apiUrl = "http://localhost/angular6_api/webservices/";
 
 
-    addemployee(employeeForm: Employee): Observable<Employee[]> {
-        console.log(employeeForm);
-
-
+    addemployee(formData: FormData): Observable<Employee> {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Content-Type', 'application/form-data');
 
-        // this.loggedIn.next(true);
-
-        return this._http.post(this.apiUrl + 'employee/add', employeeForm, {
-            headers: headers
-        }).map((response: Response) => <Employee[]>response.json());
+        return this._httpClient.post(this.apiUrl + 'employee/add', formData)
+            .map((response: Response) => <Employee>response.json());
 
     }
 
 
-    getEmployees(): Observable<Employee[]> {
+    getEmployees(): Observable<ListEmployee> {
         return this._http.get(this.apiUrl + 'employee/fetch_all')
-            .map((response: Response) => <Employee[]>response.json());
+            .map((response: Response) => <ListEmployee>response.json());
 
     }
 

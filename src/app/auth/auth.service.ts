@@ -39,7 +39,7 @@ export class AuthService {
   private apiUrl = "http://localhost/angular6_api/webservices/";
 
   // saveEmployee():Observable<CEmployee[]> {
-  login(loginForm: User): Observable<User[]> {
+  login(loginForm: User): Observable<any> {
     console.log(loginForm);
 
 

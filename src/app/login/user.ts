@@ -1,5 +1,5 @@
 export interface User {
-    email: String,
-    password: String,
-    responsecode: String,
+    responseCode: String,
+    responseMessage: String,
+    responseStatus: String,
 }
